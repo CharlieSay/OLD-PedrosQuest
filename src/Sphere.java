@@ -5,13 +5,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 public class Sphere {//TODO annotations
-    private ArrayList<Block> sphere = new ArrayList<Block>();
-    private Location center;
-    private int radius;
+    private static ArrayList<Block> sphere = new ArrayList<Block>();
+    private static Location center;
+    private static int radius;
    
-    public void Sphere(Location center, int radius) {
-        this.center = center;
-        this.radius = radius;
+    public static void Sphere(Location center, int radius) {
+        Sphere.center = center;
+        Sphere.radius = radius;
         for(int X = -radius; X < radius; X++) {
             for(int Y = -radius; Y < radius; Y++) {
                 for(int Z = -radius; Z < radius; Z++) {
