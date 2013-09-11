@@ -17,8 +17,20 @@ public class Sphere {//TODO annotations
                 for(int Z = -radius; Z < radius; Z++) {
                     if(Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius) {
                         Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());
-                        block.setType(Material.DIRT);
+                        block.setType(Material.NETHERRACK);
                         sphere.add(block);
+                        if (!(block.getType().equals(Material.NETHERRACK) && (block.getType().equals(Material.AIR)))){
+                        }else{
+                            block.setType(Material.AIR);
+                        }
+
+//			int range = 2;
+//			for (int dx = -(range); dx <= range; dx++){
+//				for (int dy = -(range); dy <= range; dy++){
+//					for (int dz = -(range); dz <= range; dz++){
+//					}
+//				}
+			//}                        
                     }
                 }
             }

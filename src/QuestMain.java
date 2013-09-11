@@ -11,6 +11,7 @@ public class QuestMain extends JavaPlugin {
     public static String GameProgress;
     public static QuestMain Main;
     public static String gamename = ("" + ChatColor.GOLD + " [The Quest] " + ChatColor.AQUA);
+    public static Location beacon;
     
     @Override
     public void onEnable(){
@@ -22,7 +23,7 @@ public class QuestMain extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Endgamestate(), this);
         Countdowns.LobbyCountdown();
         ScoreboardManager.Creation();
-        Location beacon = (current.getSpawnLocation().getBlock().getLocation().add(0, 1, 0));
+        beacon = (current.getSpawnLocation().getBlock().getLocation().add(0, 1, 0));
         current.getBlockAt(beacon).setType(Material.BEACON);
     }
 

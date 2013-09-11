@@ -112,4 +112,20 @@ public class Countdowns {
          
     }
     
+    public void BeaconStrike(){
+        int BeaconStrike;
+            BeaconStrike = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable(){
+            
+            @Override
+            public void run(){
+                if (QuestMain.GameProgress.equalsIgnoreCase("inGame")){
+                   world.strikeLightningEffect(QuestMain.beacon); 
+                }else{
+                    
+                }
+             }
+        }, 0, 600);
+        
+    }
+    
 }
