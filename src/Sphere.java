@@ -16,7 +16,7 @@ public class Sphere {//TODO annotations
             for(int Y = -radius; Y < radius; Y++) {
                 for(int Z = -radius; Z < radius; Z++) {
                     if(Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius) {
-                        Block block = center.getWorld().getBlockAt(X + center.getBlockX(), Y + center.getBlockY(), Z + center.getBlockZ());
+                        Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());
                         block.setType(Material.DIRT);
                         sphere.add(block);
                     }
