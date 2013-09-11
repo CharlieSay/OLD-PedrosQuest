@@ -105,6 +105,7 @@ public class Countdowns {
                         }
                 if (GameTimer ==0){
                     Bukkit.broadcastMessage(QuestMain.gamename + "Go Go Go!");
+                    BeaconStrike();
                 }        
             }
             
@@ -112,7 +113,7 @@ public class Countdowns {
          
     }
     
-    public void BeaconStrike(){
+    private static void BeaconStrike(){
         int BeaconStrike;
             BeaconStrike = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable(){
             
