@@ -21,8 +21,8 @@ public class QuestMain extends JavaPlugin {
         GameProgress = ("lobby");
         Bukkit.getPluginManager().registerEvents(new Mainlistener(), this);
         Bukkit.getPluginManager().registerEvents(new Endgamestate(), this);
-        Countdowns.LobbyCountdown();
         ScoreboardManager.Creation();
+        Countdowns.LobbyCountdown();
         beacon = (current.getSpawnLocation().getBlock().getLocation().add(0, 1, 0));
         current.getBlockAt(beacon).setType(Material.BEACON);
     }

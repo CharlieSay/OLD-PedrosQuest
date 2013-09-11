@@ -23,16 +23,7 @@ public class Sphere {//TODO annotations
                         if (!(block.getType().equals(Material.NETHERRACK) && (block.getType().equals(Material.AIR)))) {
                         } else {
                             block.setType(Material.AIR);
-                        }
-
-
-//			int range = 2;
-//			for (int dx = -(range); dx <= range; dx++){
-//				for (int dy = -(range); dy <= range; dy++){
-//					for (int dz = -(range); dz <= range; dz++){
-//					}
-//				}
-                        //}                        
+                        }                
                     }
                 }
             }
