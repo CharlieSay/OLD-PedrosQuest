@@ -12,7 +12,7 @@ public class ScoreboardManager extends JavaPlugin{
     
     public static org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
     public static Score seconds;
-    public static Score maxplayers;
+    public static Score players;
     public static Scoreboard board;
     public static Score explosioncountdown;
     
@@ -22,9 +22,8 @@ public class ScoreboardManager extends JavaPlugin{
         Objective objective = board.registerNewObjective("test", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         objective.setDisplayName("Stats");
-        seconds = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Countdown:")); //Get a fake offline player
-//        maxplayers = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Alive Players:"));
-     //   explosioncountdown = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Explosion Countdown:"));
+        seconds = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:")); //Get a fake offline player
+        players = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Players:")); //Get a fake offline player
     }
     
 }
