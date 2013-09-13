@@ -72,31 +72,30 @@ public class Countdowns {
                 for (Player p : Bukkit.getOnlinePlayers()){
                     p.setLevel(GameTimer);
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 20, 0);
-                    int TeleportCheck = 0;
-                    if (TeleportCheck == 1){
-                        int spawn1 = Spawn.getBlockZ() + 10;
-                        Location CT1 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn1);
-                        CT1.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT1);
-                    }else if (TeleportCheck == 2){
-                        int spawn2 = Spawn.getBlockZ() - 10;
-                        Location CT2 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn2);
-                        CT2.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT2);                        
-                    }else if (TeleportCheck == 3){
-                        int spawn3 = Spawn.getBlockX() + 10;
-                        Location CT3 = new Location(world, spawn3, Spawn.getBlockY(), Spawn.getBlockZ());
-                        CT3.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT3);                        
-                    }else if (TeleportCheck == 4){
-                        int spawn4 = Spawn.getBlockX() - 10;
-                        Location CT4 = new Location(world, spawn4, Spawn.getBlockY(), Spawn.getBlockZ());
-                        CT4.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT4);                        
-                    }
+//                    int TeleportCheck = 0;
+//                    if (TeleportCheck == 1){
+//                        int spawn1 = Spawn.getBlockZ() + 10;
+//                        Location CT1 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn1);
+//                        CT1.getBlock().setType(Material.REDSTONE_BLOCK);
+//                        p.teleport(CT1);
+//                    }else if (TeleportCheck == 2){
+//                        int spawn2 = Spawn.getBlockZ() - 10;
+//                        Location CT2 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn2);
+//                        CT2.getBlock().setType(Material.REDSTONE_BLOCK);
+//                        p.teleport(CT2);                        
+//                    }else if (TeleportCheck == 3){
+//                        int spawn3 = Spawn.getBlockX() + 10;
+//                        Location CT3 = new Location(world, spawn3, Spawn.getBlockY(), Spawn.getBlockZ());
+//                        CT3.getBlock().setType(Material.REDSTONE_BLOCK);
+//                        p.teleport(CT3);                        
+//                    }else if (TeleportCheck == 4){
+//                        int spawn4 = Spawn.getBlockX() - 10;
+//                        Location CT4 = new Location(world, spawn4, Spawn.getBlockY(), Spawn.getBlockZ());
+//                        CT4.getBlock().setType(Material.REDSTONE_BLOCK);
+//                        p.teleport(CT4);                        
+//                    }
                 if (GameTimer == 0){
                     QuestMain.GameProgress = ("inGame");
-                    p.setLevel(GameTimer);
                     p.setFoodLevel(20);
                     p.setHealth(20D);
                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 20, 0);
