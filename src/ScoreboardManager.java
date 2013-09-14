@@ -21,10 +21,9 @@ public class ScoreboardManager extends JavaPlugin {
     public static void Creation() {
         board = manager.getNewScoreboard();
         Team main = board.registerNewTeam("Players");
-        objective = board.registerNewObjective("test", "dummy");
+        objective = board.registerNewObjective("Information", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         seconds = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:")); //Get a fake offline player
-        cooldown = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Cooldown:")); //Get a fake offline player
         players = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Players:")); //Get a fake offline player
     }
 }

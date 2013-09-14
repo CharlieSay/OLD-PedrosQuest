@@ -1,8 +1,13 @@
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 
 public class Sphere {//TODO annotations
 
@@ -17,29 +22,24 @@ public class Sphere {//TODO annotations
             for (int Y = -radius; Y < radius; Y++) {
                 for (int Z = -radius; Z < radius; Z++) {
                     if (Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius) {
-                        Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());     
+                        Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());
                         int y = block.getY();
-                        while (y <= 256)
-                        {
-                            if (block.getType().equals(Material.AIR)){
-                                
-                            }else{
-                            block.getWorld().getBlockAt(block.getX(), y, block.getZ()).setType(Material.AIR); 
-                            y++;
-                            }
+                        while (y <= 130) {
+                                Bukkit.getLogger().log(Level.INFO, "Sumting", y);
+                                block.getWorld().getBlockAt(block.getX(), y, block.getZ()).setType(Material.AIR);
+                                y++;
+                            
                         }
-                        block.setType(Material.NETHERRACK);             
+                        block.setType(Material.QUARTZ_BLOCK);
                         sphere.add(block);
-                       
-                        if (!(block.getType().equals(Material.NETHERRACK) && (block.getType().equals(Material.AIR)))) {
-                        } else {
-                            block.setType(Material.AIR);
+                        List<Entity> entList = block.getWorld().getEntities();
+                        for (Entity current : entList){
+                                current.remove();
                         }
- 
                     }
-                 }
+                }
             }
-        }  
+        }
     }
 
     public Location getCenter() {

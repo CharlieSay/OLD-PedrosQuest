@@ -1,19 +1,51 @@
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Score;
 
 public class Countdowns {
     
     public static int LobbyTask;
     public static int LobbyTimer;
-    public static int GameTimer;
+    public static int StartGameTimer;
     public static int GameTask;
     public static int finalvote;
+    public static int GameTimer;
+    public static int Gamecooldown;
+    public static int GameCountdown;
     public static Location Spawn = Bukkit.getWorld("world").getSpawnLocation();    
     public static World world = Bukkit.getWorld("world");
+    
+    public static void Gamecountdown(){
+        GameTimer = 900;
+        Gamecooldown = 30;
+        GameCountdown = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable(){
+            
+            @Override
+            public void run(){
+                GameTimer--;
+                Gamecooldown--;
+                Score gamecountd;
+                gamecountd = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Countdown:"));
+                gamecountd.setScore(GameTimer);
+                Score cooldown;
+                cooldown = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Cooldown:"));
+                cooldown.setScore(Gamecooldown);
+                if (GameTimer == 60){
+                    Bukkit.broadcastMessage(QuestMain.gamename + "There is only 1 minute remaining !");
+                }
+                if (Gamecooldown == 0){
+                    Bukkit.broadcastMessage(QuestMain.gamename + "The cooldown period is now over !");
+                }
+            }
+            
+        }, 0, 20);
+         
+    }
     
     public static void LobbyCountdown(){
         LobbyTimer = 60;
@@ -63,14 +95,14 @@ public class Countdowns {
     }
     
     public static void GameCountdown(){
-        GameTimer = 11;
+        StartGameTimer = 11;
         GameTask = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable(){
             
             @Override
             public void run(){
-                GameTimer--;
+                StartGameTimer--;
                 for (Player p : Bukkit.getOnlinePlayers()){
-                    p.setLevel(GameTimer);
+                    p.setLevel(StartGameTimer);
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 20, 0);
 //                    int TeleportCheck = 0;
 //                    if (TeleportCheck == 1){
@@ -94,15 +126,17 @@ public class Countdowns {
 //                        CT4.getBlock().setType(Material.REDSTONE_BLOCK);
 //                        p.teleport(CT4);                        
 //                    }
-                if (GameTimer == 0){
+                if (StartGameTimer == 0){
                     QuestMain.GameProgress = ("inGame");
                     p.setFoodLevel(20);
                     p.setHealth(20D);
                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 20, 0);
                     Bukkit.getScheduler().cancelTask(GameTask);
+                    Gamecountdown();
+                    p.setGameMode(GameMode.SURVIVAL);
                             }
                         }
-                if (GameTimer ==0){
+                if (StartGameTimer ==0){
                     Bukkit.broadcastMessage(QuestMain.gamename + "Go Go Go!");
                     BeaconStrike();
                 }        

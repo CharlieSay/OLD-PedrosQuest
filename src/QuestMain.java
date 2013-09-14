@@ -1,5 +1,4 @@
 
-import com.sk89q.worldedit.WorldEdit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,7 +17,7 @@ public class QuestMain extends JavaPlugin {
     public void onEnable() {
         Main = this;
         World current = Bukkit.getWorld("world");
-        Sphere.Sphere(current.getSpawnLocation(), 20);
+        Sphere.Sphere(current.getSpawnLocation(), 15);
         GameProgress = ("lobby");
         Bukkit.getPluginManager().registerEvents(new Mainlistener(), this);
         Bukkit.getPluginManager().registerEvents(new Endgamestate(), this);
