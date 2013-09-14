@@ -3,6 +3,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -19,18 +20,19 @@ public class Countdowns {
     public static int Cooldown;
     public static int Gamecooldown;
     public static int GameCountdown;
+    public static Score cooldown;
+    public static Score gamecountd;
     public static Location Spawn = Bukkit.getWorld("world").getSpawnLocation();
     public static World world = Bukkit.getWorld("world");
 
     public static void Cooldown() {
         Gamecooldown = 30;
-        Score cooldown;
         cooldown = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Cooldown:"));
-        cooldown.setScore(Gamecooldown);
         Cooldown = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable() {
             @Override
             public void run() {
                 Gamecooldown--;
+                cooldown.setScore(Gamecooldown);
                 if (Gamecooldown < 6) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 0, 20);
@@ -51,7 +53,6 @@ public class Countdowns {
             @Override
             public void run() {
                 GameTimer--;
-                Score gamecountd;
                 gamecountd = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Timer:"));
                 gamecountd.setScore(GameTimer);
                 if (GameTimer < 61) {
@@ -65,6 +66,7 @@ public class Countdowns {
                         if (GameTimer == 0) {
                             Bukkit.broadcastMessage(QuestMain.gamename + "Game over, there are no winners!");
                             Bukkit.getScheduler().cancelAllTasks();
+                            QuestMain.GameProgress = ("end");
                         }
                     }
                 }
@@ -111,10 +113,6 @@ public class Countdowns {
                     }
                     Bukkit.getScheduler().cancelTask(LobbyTask);
                     GameCountdown();
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        World world = p.getWorld();
-                        p.teleport(world.getSpawnLocation());
-                    }
                 }
             }
         }, 0, 20);
@@ -130,28 +128,28 @@ public class Countdowns {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     p.setLevel(StartGameTimer);
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 20, 0);
-//                    int TeleportCheck = 0;
-//                    if (TeleportCheck == 1){
-//                        int spawn1 = Spawn.getBlockZ() + 10;
-//                        Location CT1 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn1);
-//                        CT1.getBlock().setType(Material.REDSTONE_BLOCK);
-//                        p.teleport(CT1);
-//                    }else if (TeleportCheck == 2){
-//                        int spawn2 = Spawn.getBlockZ() - 10;
-//                        Location CT2 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn2);
-//                        CT2.getBlock().setType(Material.REDSTONE_BLOCK);
-//                        p.teleport(CT2);                        
-//                    }else if (TeleportCheck == 3){
-//                        int spawn3 = Spawn.getBlockX() + 10;
-//                        Location CT3 = new Location(world, spawn3, Spawn.getBlockY(), Spawn.getBlockZ());
-//                        CT3.getBlock().setType(Material.REDSTONE_BLOCK);
-//                        p.teleport(CT3);                        
-//                    }else if (TeleportCheck == 4){
-//                        int spawn4 = Spawn.getBlockX() - 10;
-//                        Location CT4 = new Location(world, spawn4, Spawn.getBlockY(), Spawn.getBlockZ());
-//                        CT4.getBlock().setType(Material.REDSTONE_BLOCK);
-//                        p.teleport(CT4);                        
-//                    }
+                    int TeleportCheck = 0;
+                    if (TeleportCheck == 1){
+                        int spawn1 = Spawn.getBlockZ() + 10;
+                        Location CT1 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn1);
+                        CT1.getBlock().setType(Material.REDSTONE_BLOCK);
+                        p.teleport(CT1);
+                    }else if (TeleportCheck == 2){
+                        int spawn2 = Spawn.getBlockZ() - 10;
+                        Location CT2 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn2);
+                        CT2.getBlock().setType(Material.REDSTONE_BLOCK);
+                        p.teleport(CT2);                        
+                    }else if (TeleportCheck == 3){
+                        int spawn3 = Spawn.getBlockX() + 10;
+                        Location CT3 = new Location(world, spawn3, Spawn.getBlockY(), Spawn.getBlockZ());
+                        CT3.getBlock().setType(Material.REDSTONE_BLOCK);
+                        p.teleport(CT3);                        
+                    }else if (TeleportCheck == 4){
+                        int spawn4 = Spawn.getBlockX() - 10;
+                        Location CT4 = new Location(world, spawn4, Spawn.getBlockY(), Spawn.getBlockZ());
+                        CT4.getBlock().setType(Material.REDSTONE_BLOCK);
+                        p.teleport(CT4);                        
+                    }
                     if (StartGameTimer == 0) {
                         QuestMain.GameProgress = ("inGame");
                         p.setFoodLevel(20);
@@ -159,6 +157,7 @@ public class Countdowns {
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 20, 0);
                         Bukkit.getScheduler().cancelTask(GameTask);
                         Gamecountdown();
+                        Cooldown();
                         p.setGameMode(GameMode.SURVIVAL);
                     }
                 }

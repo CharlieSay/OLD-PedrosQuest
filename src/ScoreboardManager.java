@@ -24,6 +24,6 @@ public class ScoreboardManager extends JavaPlugin {
         objective = board.registerNewObjective("Information", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         seconds = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:")); //Get a fake offline player
-        players = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Players:")); //Get a fake offline player
+        players = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.RED + "Players:")); //Get a fake offline player
     }
 }

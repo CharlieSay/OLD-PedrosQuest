@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -40,6 +41,7 @@ public class Mainlistener implements Listener {
         p.setScoreboard(ScoreboardManager.board);
         if (Playerlist.size() == 4) {
             p.sendMessage("game is full");
+            
         } else {
             Playerlist.add(pname);
             int playeramount = Playerlist.size();
@@ -60,6 +62,8 @@ public class Mainlistener implements Listener {
     public void BlockBreak(BlockBreakEvent e) {
         if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
             e.setCancelled(true);
+        }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
+            e.setCancelled(true);
         } else {
             e.setCancelled(false);
         }
@@ -69,7 +73,24 @@ public class Mainlistener implements Listener {
     public void onHit(EntityDamageByEntityEvent e) {
         if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
             e.setCancelled(true);
+        }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
+            e.setCancelled(true);
         } else {
+            e.setCancelled(false);
+        }
+    }
+    
+    @EventHandler
+    public void Damage(EntityDamageEvent e){
+        if (e.getEntity() instanceof Player){
+            if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
+                e.setCancelled(true);
+            }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
+                e.setCancelled(true);
+            } else {
+                e.setCancelled(false);
+            }            
+        }else{
             e.setCancelled(false);
         }
     }
