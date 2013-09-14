@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class Mainlistener implements Listener {
 
     public static List<String> Playerlist = new ArrayList();
-    
+
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -38,13 +38,13 @@ public class Mainlistener implements Listener {
         p.sendMessage(QuestMain.gamename + ChatColor.AQUA + "Type /vote (then the number you want to vote for) to vote for your choice to craft for");
         p.setGameMode(GameMode.ADVENTURE);
         p.setScoreboard(ScoreboardManager.board);
-        if (Playerlist.size() == 4){
+        if (Playerlist.size() == 4) {
             p.sendMessage("game is full");
-        }else{
-        Playerlist.add(pname);
-        int playeramount = Playerlist.size();
-        ScoreboardManager.players.setScore(playeramount);
-         }
+        } else {
+            Playerlist.add(pname);
+            int playeramount = Playerlist.size();
+            ScoreboardManager.players.setScore(playeramount);
+        }
     }
 
     @EventHandler
@@ -64,10 +64,10 @@ public class Mainlistener implements Listener {
             e.setCancelled(false);
         }
     }
-    
+
     @EventHandler
-    public void onHit(EntityDamageByEntityEvent e){
-        if (QuestMain.GameProgress.equalsIgnoreCase("lobby")){
+    public void onHit(EntityDamageByEntityEvent e) {
+        if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
             e.setCancelled(true);
         } else {
             e.setCancelled(false);

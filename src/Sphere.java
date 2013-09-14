@@ -25,16 +25,16 @@ public class Sphere {//TODO annotations
                         Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());
                         int y = block.getY();
                         while (y <= 130) {
-                                Bukkit.getLogger().log(Level.INFO, "Sumting", y);
-                                block.getWorld().getBlockAt(block.getX(), y, block.getZ()).setType(Material.AIR);
-                                y++;
-                            
+                            Bukkit.getLogger().log(Level.INFO, "Sumting", y);
+                            block.getWorld().getBlockAt(block.getX(), y, block.getZ()).setType(Material.AIR);
+                            y++;
+
                         }
                         block.setType(Material.QUARTZ_BLOCK);
                         sphere.add(block);
                         List<Entity> entList = block.getWorld().getEntities();
-                        for (Entity current : entList){
-                                current.remove();
+                        for (Entity current : entList) {
+                            current.remove();
                         }
                     }
                 }
