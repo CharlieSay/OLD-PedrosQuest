@@ -15,13 +15,18 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 1) {
             if (p.getInventory().getItemInHand().getType().equals(Material.GOLD_LEGGINGS)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
-                    Bukkit.broadcastMessage("Game Over");
-                    Bukkit.broadcastMessage(pname + " has won.");
-                    Bukkit.broadcastMessage("They won with vote 1 = Jukebox ( Debug )");
+                    Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
+                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    int Timewon;               
+                    Timewon = Countdowns.GameTimer;
+                    Timewon = (12000 - Timewon);                    
+                    String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
+                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
+                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -30,13 +35,18 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 2) {
             if (p.getInventory().getItemInHand().getType().equals(Material.JUKEBOX)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
-                    Bukkit.broadcastMessage("Game Over");
-                    Bukkit.broadcastMessage(pname + " has won.");
-                    Bukkit.broadcastMessage("They won with vote 2 = Jukebox ( Debug )");
+                    Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
+                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    int Timewon;               
+                    Timewon = Countdowns.GameTimer;
+                    Timewon = (12000 - Timewon);                    
+                    String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
+                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
+                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -45,13 +55,18 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 3) {
             if (p.getInventory().getItemInHand().getType().equals(Material.IRON_CHESTPLATE)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
-                    Bukkit.broadcastMessage("Game Over");
-                    Bukkit.broadcastMessage(pname + " has won.");
-                    Bukkit.broadcastMessage("They won with vote 3 = Iron Chesplate ( Debug )");
+                    Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
+                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    int Timewon;               
+                    Timewon = Countdowns.GameTimer;
+                    Timewon = (12000 - Timewon);                    
+                    String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
+                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
+                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -60,13 +75,18 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 4) {
             if (p.getInventory().getItemInHand().getType().equals(Material.CAKE)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
-                    Bukkit.broadcastMessage("Game Over");
-                    Bukkit.broadcastMessage(pname + " has won.");
-                    Bukkit.broadcastMessage("They won with vote 4 = Cake ( Debug )");
+                    Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
+                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    int Timewon;               
+                    Timewon = Countdowns.GameTimer;
+                    Timewon = (12000 - Timewon);                    
+                    String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
+                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
+                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }

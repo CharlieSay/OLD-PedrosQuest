@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Score;
 
 public class Countdowns {
@@ -19,6 +20,7 @@ public class Countdowns {
     public static int GameTimer;
     public static int Cooldown;
     public static int Gamecooldown;
+    public static int TeleportCheck = 1;;
     public static int GameCountdown;
     public static Score cooldown;
     public static Score gamecountd;
@@ -48,13 +50,13 @@ public class Countdowns {
     }
 
     public static void Gamecountdown() {
-        GameTimer = 900;
+        GameTimer = 1200;
         GameCountdown = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable() {
             @Override
             public void run() {
                 GameTimer--;
-                gamecountd = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Timer:"));
-                gamecountd.setScore(GameTimer);
+                ScoreboardManager.gametime = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Timer:"));
+                ScoreboardManager.gametime.setScore(GameTimer);
                 if (GameTimer < 61) {
                     if (GameTimer == 60) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "There is only 1 minute remaining !");
@@ -128,42 +130,60 @@ public class Countdowns {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     p.setLevel(StartGameTimer);
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 20, 0);
-                    int TeleportCheck = 0;
+                    
                     if (TeleportCheck == 1){
                         int spawn1 = Spawn.getBlockZ() + 10;
-                        Location CT1 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn1);
+                        int spawn1y = Spawn.getBlockY();
+                        Location CT1 = new Location(world, Spawn.getBlockX(), spawn1y, spawn1);
                         CT1.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT1);
+                        int spawn1yp = Spawn.getBlockY() + 1;
+                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn1);
+                        p.teleport(CTP1);
+                        TeleportCheck = TeleportCheck + 1;
                     }else if (TeleportCheck == 2){
                         int spawn2 = Spawn.getBlockZ() - 10;
-                        Location CT2 = new Location(world, Spawn.getBlockX(), Spawn.getBlockY(), spawn2);
+                        int spawn2y = Spawn.getBlockY();
+                        Location CT2 = new Location(world, Spawn.getBlockX(), spawn2y, spawn2);
                         CT2.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT2);                        
+                        int spawn1yp = Spawn.getBlockY() + 1;
+                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn2);                        
+                        p.teleport(CTP1);            
+                        TeleportCheck = TeleportCheck + 1;
                     }else if (TeleportCheck == 3){
                         int spawn3 = Spawn.getBlockX() + 10;
-                        Location CT3 = new Location(world, spawn3, Spawn.getBlockY(), Spawn.getBlockZ());
+                        int spawn3y = Spawn.getBlockY();
+                        Location CT3 = new Location(world, spawn3, spawn3y, Spawn.getBlockZ());
                         CT3.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT3);                        
+                        int spawn1yp = Spawn.getBlockY() + 1;
+                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn3);                        
+                        p.teleport(CTP1);                        
+                        TeleportCheck = TeleportCheck + 1;
                     }else if (TeleportCheck == 4){
                         int spawn4 = Spawn.getBlockX() - 10;
-                        Location CT4 = new Location(world, spawn4, Spawn.getBlockY(), Spawn.getBlockZ());
+                        int spawn4y = Spawn.getBlockY();
+                        Location CT4 = new Location(world, spawn4, spawn4y, Spawn.getBlockZ());
                         CT4.getBlock().setType(Material.REDSTONE_BLOCK);
-                        p.teleport(CT4);                        
+                        int spawn1yp = Spawn.getBlockY() + 1;
+                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn4);                        
+                        p.teleport(CTP1);               
+                        TeleportCheck = TeleportCheck + 1;
                     }
                     if (StartGameTimer == 0) {
                         QuestMain.GameProgress = ("inGame");
+                        p.getInventory().setItem(0,  new ItemStack(Material.COMPASS));
+                        p.setCompassTarget(Spawn);
                         p.setFoodLevel(20);
                         p.setHealth(20D);
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 20, 0);
                         Bukkit.getScheduler().cancelTask(GameTask);
-                        Gamecountdown();
-                        Cooldown();
                         p.setGameMode(GameMode.SURVIVAL);
                     }
                 }
                 if (StartGameTimer == 0) {
                     Bukkit.broadcastMessage(QuestMain.gamename + "Go Go Go!");
                     BeaconStrike();
+                        Gamecountdown();
+                        Cooldown();                    
                 }
             }
         }, 0, 20);

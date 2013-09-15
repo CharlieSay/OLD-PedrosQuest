@@ -4,6 +4,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,8 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class Mainlistener implements Listener {
 
@@ -28,8 +33,7 @@ public class Mainlistener implements Listener {
         int z = (spawnpoint.getBlockZ());
         World w = spawnpoint.getWorld();
         Location spawn = new Location(w, x, y, z);
-        p.teleport(spawn);
-        e.setJoinMessage(QuestMain.gamename + ChatColor.GOLD + ChatColor.BOLD + ChatColor.UNDERLINE + pname + ChatColor.RESET + ChatColor.AQUA + " has joined the game!");
+        p.teleport(spawn);        
         p.sendMessage(QuestMain.gamename + "Welcome to The Quest");
         p.sendMessage(QuestMain.gamename + "Crafting choices:");
         p.sendMessage(QuestMain.gamename + ChatColor.AQUA + ChatColor.BOLD + "1." + ChatColor.RESET + " " + ChatColor.AQUA + "Golden Pants");
@@ -46,6 +50,7 @@ public class Mainlistener implements Listener {
             Playerlist.add(pname);
             int playeramount = Playerlist.size();
             ScoreboardManager.players.setScore(playeramount);
+            e.setJoinMessage(QuestMain.gamename + ChatColor.GOLD + ChatColor.BOLD + ChatColor.UNDERLINE + pname + ChatColor.RESET + ChatColor.AQUA + " has joined the game!");
         }
     }
 
@@ -56,6 +61,19 @@ public class Mainlistener implements Listener {
         } else {
             e.setCancelled(false);
         }
+    }
+    
+    @EventHandler
+    public void respawn(PlayerRespawnEvent e){
+        Player p = e.getPlayer();
+        p.getInventory().setItem(0,  new ItemStack(Material.COMPASS));
+        p.setCompassTarget(p.getWorld().getSpawnLocation());
+    }
+    
+    @EventHandler
+    public void plaerdeath(PlayerDeathEvent e){
+        String message = e.getDeathMessage();
+        e.setDeathMessage(QuestMain.gamename + message);
     }
 
     @EventHandler
@@ -70,6 +88,11 @@ public class Mainlistener implements Listener {
     }
 
     @EventHandler
+    public void playerleave(PlayerQuitEvent e){
+        Playerlist.remove(e.getPlayer().getName());
+    }
+    
+    @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
         if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
             e.setCancelled(true);
@@ -82,7 +105,6 @@ public class Mainlistener implements Listener {
     
     @EventHandler
     public void Damage(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
             if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
                 e.setCancelled(true);
             }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
@@ -90,8 +112,6 @@ public class Mainlistener implements Listener {
             } else {
                 e.setCancelled(false);
             }            
-        }else{
-            e.setCancelled(false);
-        }
+        
     }
 }

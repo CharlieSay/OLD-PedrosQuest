@@ -12,6 +12,7 @@ public class ScoreboardManager extends JavaPlugin {
 
     public static org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
     public static Score seconds;
+    public static Score gametime;
     public static Score cooldown;
     public static Score players;
     public static Scoreboard board;
@@ -21,7 +22,7 @@ public class ScoreboardManager extends JavaPlugin {
     public static void Creation() {
         board = manager.getNewScoreboard();
         Team main = board.registerNewTeam("Players");
-        objective = board.registerNewObjective("Information", "dummy");
+        ScoreboardManager.objective = ScoreboardManager.board.registerNewObjective("Information", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         seconds = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:")); //Get a fake offline player
         players = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.RED + "Players:")); //Get a fake offline player

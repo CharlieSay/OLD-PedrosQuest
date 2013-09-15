@@ -22,7 +22,7 @@ public class CommandProcessing extends JavaPlugin {
             if (VoteCheck.contains(player)) {
                 p.sendMessage(QuestMain.gamename + "You have already voted!");
             } else {
-                if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
+                if (Countdowns.LobbyTimer > 0) {
                     if (args.length == 1) {
                         if (args[0].equalsIgnoreCase("1")) {
                             v1++;
