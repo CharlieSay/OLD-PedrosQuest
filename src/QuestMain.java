@@ -10,7 +10,7 @@ public class QuestMain extends JavaPlugin {
 
     public static String GameProgress;
     public static QuestMain Main;
-    public static String gamename = ("" + ChatColor.GOLD + " [The Quest] " + ChatColor.AQUA);
+    public static String gamename = ("" + ChatColor.GOLD + " [Pedro's Quest] " + ChatColor.AQUA);
     public static Location beacon;
 
     @Override

@@ -45,6 +45,7 @@ public class Mainlistener implements Listener {
         p.setScoreboard(ScoreboardManager.board);
         if (Playerlist.size() == 4) {
             p.sendMessage("game is full");
+            SpectatorMode.SpectatorOn(p);
             
         } else {
             Playerlist.add(pname);
@@ -66,8 +67,12 @@ public class Mainlistener implements Listener {
     @EventHandler
     public void respawn(PlayerRespawnEvent e){
         Player p = e.getPlayer();
-        p.getInventory().setItem(0,  new ItemStack(Material.COMPASS));
-        p.setCompassTarget(p.getWorld().getSpawnLocation());
+        String name = p.getName();
+        if (!(SpectatorMode.Playerlist.contains(name))){
+                p.getInventory().setItem(0,  new ItemStack(Material.COMPASS));
+        p.setCompassTarget(p.getWorld().getSpawnLocation());    
+        }
+
     }
     
     @EventHandler
@@ -83,6 +88,9 @@ public class Mainlistener implements Listener {
         }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
             e.setCancelled(true);
         } else {
+            if (!(SpectatorMode.Playerlist.contains(e.getPlayer().getName()))){
+                e.setCancelled(true);
+            }
             e.setCancelled(false);
         }
     }
@@ -94,24 +102,16 @@ public class Mainlistener implements Listener {
     
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
-        if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
+        Player p =(Player) e.getEntity();
+        if (Countdowns.Gamecooldown > 0) {
             e.setCancelled(true);
         }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
             e.setCancelled(true);
         } else {
+            if (!(SpectatorMode.Playerlist.contains(p.getName()))){
+                e.setCancelled(true);
+            }            
             e.setCancelled(false);
         }
-    }
-    
-    @EventHandler
-    public void Damage(EntityDamageEvent e){
-            if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
-                e.setCancelled(true);
-            }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
-                e.setCancelled(true);
-            } else {
-                e.setCancelled(false);
-            }            
-        
-    }
+    } 
 }

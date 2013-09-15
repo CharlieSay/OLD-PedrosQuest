@@ -155,7 +155,7 @@ public class Countdowns {
                         Location CT3 = new Location(world, spawn3, spawn3y, Spawn.getBlockZ());
                         CT3.getBlock().setType(Material.REDSTONE_BLOCK);
                         int spawn1yp = Spawn.getBlockY() + 1;
-                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn3);                        
+                        Location CTP1 = new Location(world, spawn3, spawn1yp, Spawn.getBlockZ());                        
                         p.teleport(CTP1);                        
                         TeleportCheck = TeleportCheck + 1;
                     }else if (TeleportCheck == 4){
@@ -164,7 +164,7 @@ public class Countdowns {
                         Location CT4 = new Location(world, spawn4, spawn4y, Spawn.getBlockZ());
                         CT4.getBlock().setType(Material.REDSTONE_BLOCK);
                         int spawn1yp = Spawn.getBlockY() + 1;
-                        Location CTP1 = new Location(world, Spawn.getBlockX(), spawn1yp, spawn4);                        
+                        Location CTP1 = new Location(world, spawn4, spawn1yp, Spawn.getBlockZ());                        
                         p.teleport(CTP1);               
                         TeleportCheck = TeleportCheck + 1;
                     }
