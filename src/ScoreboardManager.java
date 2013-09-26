@@ -10,7 +10,7 @@ import org.bukkit.scoreboard.Team;
 
 public class ScoreboardManager extends JavaPlugin {
 
-    public static org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
+    public static org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();      
     public static Score seconds;
     public static Score gametime;
     public static Score cooldown;

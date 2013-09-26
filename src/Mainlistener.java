@@ -11,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -103,7 +102,7 @@ public class Mainlistener implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
         Player p =(Player) e.getEntity();
-        if (Countdowns.Gamecooldown > 0) {
+        if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
             e.setCancelled(true);
         }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
             e.setCancelled(true);

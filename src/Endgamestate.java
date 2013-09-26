@@ -15,6 +15,7 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 1) {
             if (p.getInventory().getItemInHand().getType().equals(Material.GOLD_LEGGINGS)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
+                    QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
                     Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
                     int Timewon;               
@@ -23,6 +24,7 @@ public class Endgamestate implements Listener {
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
                     Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);
                     for (Player rest : Bukkit.getOnlinePlayers()) {
+                        p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
@@ -35,6 +37,7 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 2) {
             if (p.getInventory().getItemInHand().getType().equals(Material.JUKEBOX)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
+                    QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
                     Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
                     int Timewon;               
@@ -43,6 +46,7 @@ public class Endgamestate implements Listener {
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
                     Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
+                        p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
@@ -55,6 +59,7 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 3) {
             if (p.getInventory().getItemInHand().getType().equals(Material.IRON_CHESTPLATE)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
+                    QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
                     Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
                     int Timewon;               
@@ -63,6 +68,7 @@ public class Endgamestate implements Listener {
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
                     Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
+                        p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
@@ -75,6 +81,7 @@ public class Endgamestate implements Listener {
         if (Countdowns.finalvote == 4) {
             if (p.getInventory().getItemInHand().getType().equals(Material.CAKE)) {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
+                    QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
                     Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
                     int Timewon;               
@@ -83,6 +90,7 @@ public class Endgamestate implements Listener {
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
                     Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
                     for (Player rest : Bukkit.getOnlinePlayers()) {
+                        p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
