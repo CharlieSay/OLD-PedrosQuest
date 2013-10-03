@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 public class Mainlistener implements Listener {
 
     public static List<String> Playerlist = new ArrayList();
+    public static List<String> Spectatorlist = new ArrayList();
 
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent e) {
@@ -45,6 +46,7 @@ public class Mainlistener implements Listener {
         if (Playerlist.size() == 4) {
             p.sendMessage("game is full");
             SpectatorMode.SpectatorOn(p);
+            Spectatorlist.add(pname);
             
         } else {
             Playerlist.add(pname);
@@ -67,7 +69,7 @@ public class Mainlistener implements Listener {
     public void respawn(PlayerRespawnEvent e){
         Player p = e.getPlayer();
         String name = p.getName();
-        if (!(SpectatorMode.Playerlist.contains(name))){
+        if (!(Spectatorlist.contains(e.getPlayer().getName()))){
                 p.getInventory().setItem(0,  new ItemStack(Material.COMPASS));
         p.setCompassTarget(p.getWorld().getSpawnLocation());    
         }
@@ -87,7 +89,7 @@ public class Mainlistener implements Listener {
         }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
             e.setCancelled(true);
         } else {
-            if (!(SpectatorMode.Playerlist.contains(e.getPlayer().getName()))){
+            if ((Spectatorlist.contains(e.getPlayer().getName()))){
                 e.setCancelled(true);
             }
             e.setCancelled(false);
@@ -102,12 +104,13 @@ public class Mainlistener implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
         Player p =(Player) e.getEntity();
-        if (QuestMain.GameProgress.equalsIgnoreCase("lobby")) {
+        if (Countdowns.Gamecooldown > 0) {
             e.setCancelled(true);
         }if (QuestMain.GameProgress.equalsIgnoreCase("end")){
             e.setCancelled(true);
         } else {
-            if (!(SpectatorMode.Playerlist.contains(p.getName()))){
+            Player pa = (Player) e.getDamager();
+            if (Spectatorlist.contains(pa.getName())){
                 e.setCancelled(true);
             }            
             e.setCancelled(false);

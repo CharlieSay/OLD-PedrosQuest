@@ -38,10 +38,6 @@ public class Countdowns {
             @Override
             public void run() {
                 Gamecooldown--;
-
-                String time = TimeFormat.formatIntoHHMMSS(GameTimer);
-                String finaltime = (ChatColor.AQUA + "Time Left: " + time);
-                ScoreboardManager.board.getObjective("Information").setDisplayName(finaltime);
                 ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:"));
                 if (Gamecooldown < 6) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
@@ -49,6 +45,7 @@ public class Countdowns {
                     }
                     if (Gamecooldown == 0) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "The cooldown period is now over !");
+                        Bukkit.broadcastMessage(QuestMain.gamename + "You can now kill one another!");
                         ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Cooldown:"));
                         Bukkit.getScheduler().cancelTask(Cooldown);
                     }
@@ -67,6 +64,9 @@ public class Countdowns {
             @Override
             public void run() {
                 GameTimer--;
+                String time = TimeFormat.formatIntoHHMMSS(GameTimer);
+                String finaltime = (ChatColor.AQUA + "Time Left: " + time);
+                ScoreboardManager.board.getObjective("Information").setDisplayName(finaltime);                
                 if (GameTimer < 61) {
                     if (GameTimer == 60) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "There is only 1 minute remaining !");

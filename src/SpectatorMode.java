@@ -8,9 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpectatorMode extends JavaPlugin implements Listener{
-    
-    public static List<String> Playerlist = new ArrayList();
-    
+        
     public static void SpectatorOn(Player p){
     for (Player hide : Bukkit.getOnlinePlayers())
         hide.hidePlayer(p);
