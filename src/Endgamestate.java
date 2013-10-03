@@ -1,5 +1,6 @@
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,18 +18,18 @@ public class Endgamestate implements Listener {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
                     QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
-                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    Bukkit.broadcastMessage(QuestMain.gamename + ChatColor.RED + ChatColor.BOLD + pname + ChatColor.RESET + ChatColor.AQUA+ " has won.");
                     int Timewon;               
                     Timewon = Countdowns.GameTimer;
                     Timewon = (12000 - Timewon);                    
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
-                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);
+                    Bukkit.broadcastMessage(QuestMain.gamename + "They won in - " + timewin);
+                    Bukkit.getScheduler().cancelAllTasks();
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
-                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -39,18 +40,18 @@ public class Endgamestate implements Listener {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
                     QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
-                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    Bukkit.broadcastMessage(QuestMain.gamename + ChatColor.RED + ChatColor.BOLD + pname + ChatColor.RESET + ChatColor.AQUA+ " has won.");
                     int Timewon;               
                     Timewon = Countdowns.GameTimer;
                     Timewon = (12000 - Timewon);                    
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
-                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
+                    Bukkit.broadcastMessage(QuestMain.gamename + "They won in - " + timewin);   
+                    Bukkit.getScheduler().cancelAllTasks();
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
-                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -61,18 +62,18 @@ public class Endgamestate implements Listener {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
                     QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
-                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    Bukkit.broadcastMessage(QuestMain.gamename + ChatColor.RED + ChatColor.BOLD + pname + ChatColor.RESET + ChatColor.AQUA+ " has won.");
                     int Timewon;               
                     Timewon = Countdowns.GameTimer;
                     Timewon = (12000 - Timewon);                    
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
-                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
+                    Bukkit.broadcastMessage(QuestMain.gamename + "They won in - " + timewin);            
+                    Bukkit.getScheduler().cancelAllTasks();
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
-                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }
@@ -83,18 +84,18 @@ public class Endgamestate implements Listener {
                 if (e.getClickedBlock().getType().equals(Material.BEACON)) {
                     QuestMain.GameProgress = ("end");
                     Bukkit.broadcastMessage(QuestMain.gamename + "Game Over");
-                    Bukkit.broadcastMessage(QuestMain.gamename + pname + " has won.");
+                    Bukkit.broadcastMessage(QuestMain.gamename + ChatColor.RED + ChatColor.BOLD + pname + ChatColor.RESET + ChatColor.AQUA+ " has won.");
                     int Timewon;               
                     Timewon = Countdowns.GameTimer;
                     Timewon = (12000 - Timewon);                    
                     String timewin = TimeFormat.formatIntoHHMMSS(Timewon);
-                    Bukkit.broadcastMessage(QuestMain.gamename + " they won in - " + timewin);                    
+                    Bukkit.broadcastMessage(QuestMain.gamename + "They won in - " + timewin);      
+                    Bukkit.getScheduler().cancelAllTasks();
                     for (Player rest : Bukkit.getOnlinePlayers()) {
                         p.getInventory().clear();
                         if (rest.getName().equalsIgnoreCase(pname)) {
                         } else {
                             rest.teleport(p);
-                            Bukkit.getScheduler().cancelAllTasks();
                         }
                     }
                 }

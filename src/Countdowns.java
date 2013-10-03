@@ -21,8 +21,7 @@ public class Countdowns {
     public static int GameTimer;
     public static int Cooldown;
     public static int Gamecooldown;
-    public static int TeleportCheck = 1;
-    ;
+    public static int TeleportCheck = 1;    
     public static int GameCountdown;
     public static Score cooldown;
     public static Score gamecountd;
@@ -38,7 +37,7 @@ public class Countdowns {
             @Override
             public void run() {
                 Gamecooldown--;
-                ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:"));
+                cooldown.setScore(Gamecooldown);
                 if (Gamecooldown < 6) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 0, 20);
@@ -57,8 +56,8 @@ public class Countdowns {
 
     public static void Gamecountdown() {
         GameTimer = 1200;
-
-
+        Cooldown();
+        ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:"));
         ScoreboardManager.gametime = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Timer:"));
         GameCountdown = Bukkit.getScheduler().scheduleSyncRepeatingTask((QuestMain.Main), new Runnable() {
             @Override
@@ -110,7 +109,7 @@ public class Countdowns {
                     if ((QuestMain.v1 > QuestMain.v2) || (QuestMain.v1 > QuestMain.v3) || (QuestMain.v1 > QuestMain.v4)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Golden Pants have been chosen with " + QuestMain.v1 + " votes!");
                         finalvote = 1; //Golden Pants craft
-                    } else if ((QuestMain.v2 > QuestMain.v1) || (QuestMain.v2 > QuestMain.v3) || (QuestMain.v3 > QuestMain.v4)) {
+                    } else if ((QuestMain.v2 > QuestMain.v1) || (QuestMain.v2 > QuestMain.v3) || (QuestMain.v2 > QuestMain.v4)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Jukebox have been chosen with " + QuestMain.v2 + " votes!");
                         finalvote = 2;                      //Jukebox craft  
                     } else if ((QuestMain.v3 > QuestMain.v2) || (QuestMain.v3 > QuestMain.v4) || (QuestMain.v3 > QuestMain.v1)) {
@@ -120,7 +119,7 @@ public class Countdowns {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Cake have been chosen with " + QuestMain.v4 + " votes!");
                         finalvote = 4;                        //Cake
                     } else {
-                        Bukkit.broadcastMessage(QuestMain.gamename + "either no votes were casted, or vote count tied! So Golden Pants were chosen by default!");
+                        Bukkit.broadcastMessage(QuestMain.gamename + "Either no votes were casted, or vote count tied! So Golden Pants were chosen by default!");
                         finalvote = 1;
                     }
                     Bukkit.getScheduler().cancelTask(LobbyTask);
@@ -197,7 +196,6 @@ public class Countdowns {
                     Bukkit.broadcastMessage(QuestMain.gamename + "Go Go Go!");
                     BeaconStrike();
                     Gamecountdown();
-                    Cooldown();
                 }
             }
         }, 0, 20);

@@ -27,6 +27,7 @@ public class QuestMain extends JavaPlugin {
     public void onEnable() {
         Main = this;
         World current = Bukkit.getWorld("world");
+        current.setTime(0);
         Sphere.Sphere(current.getSpawnLocation(), 15);
         GameProgress = ("lobby");
         Bukkit.getPluginManager().registerEvents(new Mainlistener(), this);
