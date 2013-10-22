@@ -4,3 +4,4 @@ version: 0.9
 commands:
   vote:
   v:
+  dev:

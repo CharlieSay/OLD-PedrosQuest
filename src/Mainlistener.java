@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -31,6 +32,7 @@ public class Mainlistener implements Listener {
     public void PlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         String pname = p.getName();
+        p.getInventory().clear();
         p.setFoodLevel(20);
         p.setHealth(20D);
         Location spawnpoint = p.getWorld().getSpawnLocation();
@@ -55,7 +57,7 @@ public class Mainlistener implements Listener {
             Spectatorlist.add(pname);
 
         } else {
-            if (Countdowns.LobbyTimer > 0) {
+            if (Countdowns.LobbyTimer == 0) {
                 p.sendMessage(QuestMain.gamename + "The game has already started, you are now a spectator!");
                 SpectatorMode.SpectatorOn(p);
                 Spectatorlist.add(pname);
@@ -72,7 +74,11 @@ public class Mainlistener implements Listener {
     @EventHandler
     public void PlayerMoveEvent(PlayerMoveEvent e) {
         if (QuestMain.GameProgress.equalsIgnoreCase("GameStarting")) {
-            e.setCancelled(true);
+            if (QuestMain.devmode.contains(e.getPlayer().getName())) {
+                e.setCancelled(false);
+            } else {
+                e.setCancelled(true);
+            }
         } else {
             e.setCancelled(false);
         }
@@ -82,8 +88,11 @@ public class Mainlistener implements Listener {
     public void respawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         if (!(Spectatorlist.contains(e.getPlayer().getName()))) {
-            p.getInventory().setItem(0, new ItemStack(Material.COMPASS));
-            p.setCompassTarget(p.getWorld().getSpawnLocation());
+            ItemStack compass = (new ItemStack(Material.COMPASS));
+            ItemMeta compassmeta = compass.getItemMeta();
+            compassmeta.setDisplayName(ChatColor.AQUA + " Spawn Location");
+            compass.setItemMeta(compassmeta);
+            p.getInventory().setItem(0, compass);
         }
 
     }
@@ -110,7 +119,7 @@ public class Mainlistener implements Listener {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
-        if (Countdowns.LobbyTimer > 0) {
+        if (Countdowns.Gamecooldown > 0) {
             e.setCancelled(true);
         } else {
             e.setCancelled(false);
@@ -131,11 +140,30 @@ public class Mainlistener implements Listener {
 
     @EventHandler
     public void CompassNo(InventoryClickEvent e) {
-        ItemMeta itemmeta = e.getCurrentItem().getItemMeta();
-        if (itemmeta.getDisplayName().equalsIgnoreCase(ChatColor.AQUA + " Spawn Location")) {
+        if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + " Spawn Location")) {
             e.setCancelled(true);
-        } else {
-            e.setCancelled(false);
+        }
+    }
+
+    @EventHandler
+    public void NoNatureDeath(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (Countdowns.Gamecooldown > 0) {
+                e.setCancelled(true);
+            } else {
+                e.setCancelled(false);
+            }
+        }
+    }
+
+    @EventHandler
+    public void EntityDropEvent(PlayerDeathEvent e) {
+        ItemStack compass = (new ItemStack(Material.COMPASS));
+        ItemMeta compassmeta = compass.getItemMeta();
+        compassmeta.setDisplayName(ChatColor.AQUA + " Spawn Location");
+        compass.setItemMeta(compassmeta);
+        if (e.getDrops().contains(compass)) {
+            e.getDrops().remove(compass);
         }
     }
 }

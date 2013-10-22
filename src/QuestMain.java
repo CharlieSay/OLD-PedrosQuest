@@ -11,8 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 public class QuestMain extends JavaPlugin {
+
     private List<String> VoteCheck = new ArrayList<String>();
     public static int v1;
     public static int v2;
@@ -21,10 +21,13 @@ public class QuestMain extends JavaPlugin {
     public static String GameProgress;
     public static QuestMain Main;
     public static String gamename = ("" + ChatColor.GOLD + " [Pedro's Quest] " + ChatColor.AQUA);
+    public static List<String> devmode = new ArrayList();
     public static Location beacon;
-
+    
     @Override
     public void onEnable() {
+        Countdowns.Gamecooldown = 30;
+        Endgamestate.gameend = false;
         Main = this;
         World current = Bukkit.getWorld("world");
         current.setTime(0);
@@ -38,9 +41,11 @@ public class QuestMain extends JavaPlugin {
         current.getBlockAt(beacon).setType(Material.BEACON);
     }
     
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+        if (!(sender instanceof Player)){
+            
+        }if (sender instanceof Player){
         Player p = (Player) sender;
         String player = p.getName();
         if (commandLabel.equalsIgnoreCase("vote") || (commandLabel.equalsIgnoreCase("v"))) {
@@ -62,12 +67,12 @@ public class QuestMain extends JavaPlugin {
                         } else if (args[0].equalsIgnoreCase("3")) {
                             v3++;
                             p.sendMessage(QuestMain.gamename + "You voted for " + ChatColor.RED + "Iron Chestplate " + ChatColor.AQUA + "it now has " + ChatColor.RED
-                                    + v3 + ChatColor.AQUA + " votes.");                                
+                                    + v3 + ChatColor.AQUA + " votes.");                            
                             VoteCheck.add(player);
                         } else if (args[0].equalsIgnoreCase("4")) {
                             v4++;
                             p.sendMessage(QuestMain.gamename + "You voted for " + ChatColor.RED + "Cake " + ChatColor.AQUA + "it now has " + ChatColor.RED
-                                    + v4 + ChatColor.AQUA + " votes.");                                
+                                    + v4 + ChatColor.AQUA + " votes.");                            
                             VoteCheck.add(player);
                         } else {
                             p.sendMessage(QuestMain.gamename + "Wrong usage of command!");
@@ -81,10 +86,20 @@ public class QuestMain extends JavaPlugin {
                     p.sendMessage(QuestMain.gamename + "Voting is no longer active!");
                 }
             }
+        } else if (commandLabel.equalsIgnoreCase("dev")) {
+            if (p.getName().equalsIgnoreCase("ocelotcr")) {
+                Mainlistener.Playerlist.remove(p.getName());
+                Mainlistener.Spectatorlist.remove(p.getName());
+                devmode.add(p.getName());
+                Bukkit.broadcastMessage("Dev mode activated for " + p.getName());
+                ScoreboardManager.players.setScore(Mainlistener.Playerlist.size());
+            } else {
+                Bukkit.broadcastMessage(p.getName() + " You aint no dev, stop trying that command.");
+            }
         }
-
+      }
 ///////////////////////////
         return false; //Dopey
 ///////////////////////////    
-    }   
+    }    
 }

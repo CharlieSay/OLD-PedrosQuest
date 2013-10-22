@@ -29,7 +29,6 @@ public class Countdowns {
     public static World world = Bukkit.getWorld("world");
 
     public static void Cooldown() {
-        Gamecooldown = 30;
         cooldown = ScoreboardManager.objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Cooldown:"));
         ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Game Timer:"));
         ScoreboardManager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:"));
@@ -78,6 +77,10 @@ public class Countdowns {
                             Bukkit.broadcastMessage(QuestMain.gamename + "Game over, there are no winners!");
                             Bukkit.getScheduler().cancelAllTasks();
                             QuestMain.GameProgress = ("end");
+                            for (String p1 : Mainlistener.Playerlist){
+                                Player p = Bukkit.getPlayer(p1);
+                                p.getInventory().clear();
+                            }
                         }
                     }
                 }
@@ -102,20 +105,19 @@ public class Countdowns {
                 } else if (LobbyTimer == 10) {
                     Bukkit.broadcastMessage(QuestMain.gamename + "10 seconds of lobby remain!");
                 } else if (LobbyTimer == 0) {
-                    Bukkit.getScheduler().cancelTask(LobbyTask);
                     QuestMain.GameProgress = ("GameStarting");
                     Bukkit.broadcastMessage(QuestMain.gamename + "The game is now starting!");
                     Bukkit.broadcastMessage(QuestMain.gamename + "You will be teleported back to the Spawn Point!");
-                    if ((QuestMain.v1 > QuestMain.v2) || (QuestMain.v1 > QuestMain.v3) || (QuestMain.v1 > QuestMain.v4)) {
+                    if ((QuestMain.v1 > QuestMain.v2) && (QuestMain.v1 > QuestMain.v3) && (QuestMain.v1 > QuestMain.v4)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Golden Pants have been chosen with " + QuestMain.v1 + " votes!");
                         finalvote = 1; //Golden Pants craft
-                    } else if ((QuestMain.v2 > QuestMain.v1) || (QuestMain.v2 > QuestMain.v3) || (QuestMain.v2 > QuestMain.v4)) {
+                    } else if ((QuestMain.v2 > QuestMain.v1) && (QuestMain.v2 > QuestMain.v3) && (QuestMain.v2 > QuestMain.v4)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Jukebox have been chosen with " + QuestMain.v2 + " votes!");
                         finalvote = 2;                      //Jukebox craft  
-                    } else if ((QuestMain.v3 > QuestMain.v2) || (QuestMain.v3 > QuestMain.v4) || (QuestMain.v3 > QuestMain.v1)) {
+                    } else if ((QuestMain.v3 > QuestMain.v2) && (QuestMain.v3 > QuestMain.v4) && (QuestMain.v3 > QuestMain.v1)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Iron Chestplate have been chosen with " + QuestMain.v3 + " votes!");
                         finalvote = 3;                      //Iron Chestplate  
-                    } else if ((QuestMain.v4 > QuestMain.v2) || (QuestMain.v4 > QuestMain.v3) || (QuestMain.v4 > QuestMain.v1)) {
+                    } else if ((QuestMain.v4 > QuestMain.v2) && (QuestMain.v4 > QuestMain.v3) && (QuestMain.v4 > QuestMain.v1)) {
                         Bukkit.broadcastMessage(QuestMain.gamename + "Cake have been chosen with " + QuestMain.v4 + " votes!");
                         finalvote = 4;                        //Cake
                     } else {
@@ -136,12 +138,13 @@ public class Countdowns {
             @Override
             public void run() {
                 StartGameTimer--;
-                for (Player p : Bukkit.getOnlinePlayers()) {
+                for (String pn : Mainlistener.Playerlist) {
+                    Player p = Bukkit.getPlayer(pn);
                     p.setLevel(StartGameTimer);
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 20, 0);
 
                     if (TeleportCheck == 1) {
-                        int spawn1 = Spawn.getBlockZ() + 10;
+                        int spawn1 = Spawn.getBlockZ() + 13;
                         int spawn1y = Spawn.getBlockY();
                         Location CT1 = new Location(world, Spawn.getBlockX(), spawn1y, spawn1);
                         CT1.getBlock().setType(Material.REDSTONE_BLOCK);
@@ -150,7 +153,7 @@ public class Countdowns {
                         p.teleport(CTP1);
                         TeleportCheck = TeleportCheck + 1;
                     } else if (TeleportCheck == 2) {
-                        int spawn2 = Spawn.getBlockZ() - 10;
+                        int spawn2 = Spawn.getBlockZ() - 13;
                         int spawn2y = Spawn.getBlockY();
                         Location CT2 = new Location(world, Spawn.getBlockX(), spawn2y, spawn2);
                         CT2.getBlock().setType(Material.REDSTONE_BLOCK);
@@ -159,7 +162,7 @@ public class Countdowns {
                         p.teleport(CTP1);
                         TeleportCheck = TeleportCheck + 1;
                     } else if (TeleportCheck == 3) {
-                        int spawn3 = Spawn.getBlockX() + 10;
+                        int spawn3 = Spawn.getBlockX() + 13;
                         int spawn3y = Spawn.getBlockY();
                         Location CT3 = new Location(world, spawn3, spawn3y, Spawn.getBlockZ());
                         CT3.getBlock().setType(Material.REDSTONE_BLOCK);
@@ -168,7 +171,7 @@ public class Countdowns {
                         p.teleport(CTP1);
                         TeleportCheck = TeleportCheck + 1;
                     } else if (TeleportCheck == 4) {
-                        int spawn4 = Spawn.getBlockX() - 10;
+                        int spawn4 = Spawn.getBlockX() - 13;
                         int spawn4y = Spawn.getBlockY();
                         Location CT4 = new Location(world, spawn4, spawn4y, Spawn.getBlockZ());
                         CT4.getBlock().setType(Material.REDSTONE_BLOCK);
