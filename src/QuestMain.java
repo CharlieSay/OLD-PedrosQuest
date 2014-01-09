@@ -86,16 +86,6 @@ public class QuestMain extends JavaPlugin {
                     p.sendMessage(QuestMain.gamename + "Voting is no longer active!");
                 }
             }
-        } else if (commandLabel.equalsIgnoreCase("dev")) {
-            if (p.getName().equalsIgnoreCase("ocelotcr")) {
-                Mainlistener.Playerlist.remove(p.getName());
-                Mainlistener.Spectatorlist.remove(p.getName());
-                devmode.add(p.getName());
-                Bukkit.broadcastMessage("Dev mode activated for " + p.getName());
-                ScoreboardManager.players.setScore(Mainlistener.Playerlist.size());
-            } else {
-                Bukkit.broadcastMessage(p.getName() + " You aint no dev, stop trying that command.");
-            }
         }
       }
 ///////////////////////////
